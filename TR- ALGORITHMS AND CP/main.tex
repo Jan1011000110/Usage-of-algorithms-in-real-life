@@ -1,0 +1,161 @@
+\documentclass[twoside,12pt,a4paper,catlan]{report}
+%\includeonly{chapter04,list}
+
+\usepackage[catalan]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{listings}
+\usepackage[table]{xcolor}
+\usepackage{tikz}
+\usepackage{multicol}
+\usepackage{hyperref}
+\usepackage{array}
+\usepackage{microtype}
+
+\usepackage{fouriernc}
+\usepackage[T1]{fontenc}
+
+
+\usepackage{graphicx}
+\usepackage{framed}
+\usepackage{amssymb}
+\usepackage{amsmath}
+
+\usepackage{pifont}
+\usepackage{ifthen}
+\usepackage{makeidx}
+\usepackage{enumitem}
+
+\usepackage{titlesec}
+
+\usepackage{fancyhdr}
+
+\usepackage{skak}
+\usepackage[scaled=0.95]{inconsolata}
+
+\usepackage[dvipsnames]{xcolor}
+
+\usetikzlibrary{patterns,snakes}
+\pagestyle{plain}
+
+\definecolor{keywords}{HTML}{44548A}
+\definecolor{strings}{HTML}{00999A}
+\definecolor{comments}{HTML}{990000}
+
+\lstset{language=C++,frame=single,basicstyle=\ttfamily \small,showstringspaces=false,columns=flexible}
+\lstset{
+  literate={ö}{{\"o}}1
+           {ä}{{\"a}}1
+           {ü}{{\"u}}1
+}
+\lstset{xleftmargin=20pt,xrightmargin=5pt}
+\lstset{aboveskip=12pt,belowskip=8pt}
+
+\lstset{
+    commentstyle=\color{comments},
+    keywordstyle=\color{keywords},
+    stringstyle=\color{strings}
+}
+
+\date{Draft \today}
+
+\usepackage[a4paper,vmargin=30mm,hmargin=33mm,footskip=15mm]{geometry}
+
+\title{\Huge Algorismes encarats a la programació competitiva, presents a la tecnologia i vida quotidiana}
+\author{\Large Jan Matas Cantos}
+
+\makeindex
+\usepackage[totoc]{idxlayout}
+
+%\titleformat{\subsubsection}
+%{\normalfont\large\bfseries\sffamily}{\thesubsection}{1em}{}
+
+\setcounter{secnumdepth}{3}
+\setcounter{tocdepth}{3}
+
+\begin{document}
+
+
+%\selectlanguage{finnish}
+
+%\setcounter{page}{1}
+%\pagenumbering{roman}
+
+\maketitle
+
+\include{abstract_es}
+\include{abstract_en}
+\include{agraiments}
+
+\tableofcontents
+
+\include{preface}
+
+\pagenumbering{arabic}
+\setcounter{page}{7}
+
+\newcommand{\key}[1] {\textbf{#1}}
+
+% index
+\include{introducció}
+\include{amotivació}
+\include{hipòtesi}
+
+\part{Marc Teòric}
+\include{algorismes}
+\include{algorismesq}
+\include{caracteristiques}
+\include{aparts}
+\include{autilitats}
+\include{alginternet}
+\include{bigo}
+
+\input{algorismes_cp}
+\input{atipos}
+\include{Iteració}
+\include{Recursió}
+\include{bruteforce}
+\include{greedy}
+\include{dvd&cnq}
+\include{bs}
+%\include{itrec}%
+\include{dp}
+\include{backtracking}
+\input{pageGraph}
+\input{grafs}
+\include{dfs}
+\include{bfs}
+\include{dijkstra}
+
+
+\part{Marc Pràctic}
+\include{bruteforce_real}
+\include{bruteforce_problemes}
+\include{greedy_real}
+\include{greedy_problemes}
+\include{bs_real}
+\include{bs_problemes}
+\include{dp_real}
+\include{dp_problemes}
+\include{backtracking_real}
+\include{backtracking_problemes}
+\include{grafs_real}
+\include{grafs_problemes}
+
+
+\include{int_Kaurov}
+\include{int_Sergio}
+
+\include{iconclusions}
+
+
+
+\cleardoublepage
+\phantomsection
+\addcontentsline{toc}{chapter}{Bibliogràfia i Webgrafia}
+\include{list}
+
+
+\cleardoublepage
+%\printindex%
+
+\end{document}

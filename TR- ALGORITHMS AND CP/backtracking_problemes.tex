@@ -1,0 +1,116 @@
+\subsection{Problemes Backtracking}
+
+\textbf{Problema 1:} \newline
+
+Dificultat -> mitjana. \newline
+
+\textbf{Enunciat:} \newline
+
+Donat un sudoku amb una única solució possible i sense resoldre, resol el sudoku. \newline
+
+El sudoku està representat com una matriu amb 9 files i 9 columnes on les caselles amb zeros representen caselles que no tenen assignades un número i, per tant, que hem de completar.
+\newline
+
+\textbf{Idea:} \newline
+
+La idea per resoldre aquest problema és simple, però difícil de comprendre si no estàs familiaritzat amb els algoritmes recursius i el backtracking, primer de tot hem de passar per cada casella i si aquella casella no té cap número assignat, li intentem assignar un número de l'1 al 9, per tant, si estem intentant assignar un número $x$ a una casella $y$, hem de comprovar les següents 3 condicions:
+
+\begin{itemize}
+\item Hi ha algun número $x$ en la columna de $y$?
+\item Hi ha algun número $x$ en la fila de $y$?
+\item Hi ha algun número $x$ en el quadrat de $y$?
+\end{itemize}
+
+Si no es compleix cap de les anteriors condicions,  assignem el número $x$ a la casella $y$ i continuem mirant, si en alguna casella no podem assignar cap número, donem valor 0 a aquella casella i retrocedim a l'anterior casella que prèviament hàgem assignat algun número (és a dir, fem backtracking) i intentem assignar-li un altre número, si no aconseguim assignar-li cap número, donem valor 0 a aquella casella i retrocedim de nou (és a dir, fem backtracking), per contra, si li assignem un número llavors, continuem a la següent casella i així successivament fins que completem el sudoku. \newline
+
+Per resoldre aquest problema hem d'implementar un algorisme recursiu i fer backtracking. \newline
+
+\textbf{Implementació}
+
+\begin{lstlisting}
+void print(vector<vector> &sudoku){
+    for (int i = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++)
+            cout << sudoku[i][j] << " \n" [j == 8];
+
+    // simplement imprimim el sudoku resolt
+}
+
+bool check(int fila, int columna, int numero, vector<vector>
+&sudoku){
+    for(int i = 0; i < 9; i++)
+        if (sudoku[fila][i] == numero || sudoku[i][columna] == numero)
+            return false;
+    
+    // comprovem si ja hi ha el numero que volem assignar
+    // en la fila o columna de la casella actual
+    
+    for (int i = 0; i < 3; i++)
+        for (int j = 0; j < 3; j++)
+            if (sudoku[fila / 3 * 3 + i][columna / 3 * 3 + j] == numero)
+                return false;
+    
+    // comprovem si ja hi ha el número que volem assignar
+    // en el quadrat de la casella actual
+    
+    return true;
+    // si no hem trobat el número que volem assignar
+    // ni en la fila ni en la columna ni en el quadrat
+    // llavors diem que sí que podem assignar el número
+    // en la casella actual
+}
+
+bool backtracking(int fila, int columna, vector<vector> &sudoku){
+    if (fila == 8 && columna == 9)
+        return true;
+    // cas base, si hem completat tot el sudoku, parem
+    
+    if (columna == 9){
+        columna = 0;
+        fila += 1;
+        // si hem completat tota una fila,
+        // canviem a la següent fila
+    }
+    
+    if (sudoku[fila][columna] != 0)
+        return backtracking(fila, columna + 1, sudoku);
+    // si aquesta casella ja està assignada, continuem
+    // a la següent casella
+    
+    for (int numero = 1; numero <= 9; numero++){
+        // iterem sobre els números que volem assignar
+        if (check(fila, columna, numero, sudoku)){
+            // si podem assignar aquest número
+            sudoku[fila][columna] = numero;
+        // assignem el número a la casella corresponent
+    
+        if (backtracking(fila, columna + 1, sudoku) == true)
+            return true;
+        // mirem si podem assignar un número
+        // a la següent casella
+        
+        sudoku[fila][columna] = 0;
+        // si el número que hem colocat prèviament no
+        // comporta una solució del sudoku,
+        // donem valor 0 a aquella casella, ja que
+        // ha de quedar com no assignada
+        }
+    }
+    return false;
+    // si no hem pogut colocar cap número en aquesta casella
+    // retrocedim a la casella prèvia
+}
+
+int main(){
+vector<vector> sudoku(9, vector (9));
+    for (int i = 0; i < 9; i++)
+        for (int j = 0; j < 9; j++)
+            cin >> sudoku[i][j];
+    // llegim el sudoku
+    
+    if (backtracking(0, 0, sudoku) == true)
+        print(sudoku);
+    // si hem trobat alguna solució, imprimim el sudoku
+}
+\end{lstlisting}
+

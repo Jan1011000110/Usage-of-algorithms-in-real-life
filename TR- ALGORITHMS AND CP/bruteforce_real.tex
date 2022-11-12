@@ -1,0 +1,44 @@
+\section{Força Bruta A La Vida Real}
+
+Durant el dia, emprem concurrentment l'algorisme de força bruta, ja que aquest, encara que pugui trigar molt a donar-nos una solució, sempre en troba una.
+
+Per exemple, quan som petits i els nostres pares ens deixen el clauer per obrir la porta de casa, nosaltres no sabem quina és la clau bona, per tant, emprem la força bruta, bàsicament provem d'obrir la porta a cada clau fins que alguna ens obre la porta, utilitzem aquest mètode, ja que sabem que sempre trobarem la clau bona.
+
+A la vida real, en l'àmbit de la tecnologia, la força bruta s'utilitza recurrentment en el pirateig.
+
+Cal recalar que quasi tots els problemes que podem trobar es poden resoldre amb la força bruta, per exemple un problema de grafs en el qual hàgem de trobar el camí més curt des d'un node $x$ a un node $y$, també es pot resoldre amb força bruta, puix que podem provar tots els camins possibles i agafar el més curt, tot i això, aquest algorisme tindria una complexitat temporal de $O({n\displaystyle !\,})$ i per tant si $n = 50$, un valor realment petit, la força bruta faria aproximadament unes $3 \cdot 10^{64}$ operacions, un nombre totalment desorbitat.
+
+Com a exemple pràctic, imitaré un algorisme de força bruta que utilitzen els pirates informàtics per endevinar una contrasenya (que pot contenir tota classe de caràcters) de secreta d'un usuari.
+
+\begin{lstlisting}
+int main(){
+    string caractersPossibles "!#$%&\'()*+,-./0123456789:;<=>?@ABCDE
+    FGHIJKLMNOPQRSTUVWXYZ[\\]^_'abcdefghijklmnopqrstuvwxyz{|}~";
+    
+    int maximaLlargada = 16;
+    
+    string contrasenyaUsuari = "abc123#";
+    
+    do {
+        // miro totes les possibles permutacions
+        // de tots els caràcters
+        string contrasenyaProva = "";
+        for (int i = 1; i <= maximaLlargada; i++){
+            // provo una contrasenya per cada
+            // llargada possible
+            contrasenyaProva += caractersPossibles[i];
+            
+            if (contrasenyaProva == contrasenyaUsuari) {
+                // les contrasenyes coincideixen
+                cout << "He trobat la teva contrasenya !"
+                return 0;
+            }
+        
+        }
+    } while (next_permutation(caractersPossibles.begin(), 
+      caractersPossibles.end());
+
+}
+\end{lstlisting}
+
+Cal recalcar que la complexitat d'aquest algorisme és de $O(maximaLlargada * 93!)$, uns números vertiginosos, és per això que els pirates informàtics optimitzen relativament els seus algorismes de força bruta.
